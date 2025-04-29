@@ -1,0 +1,55 @@
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\usetikzlibrary{arrows.meta}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+}
+
+
+
+% Document
+\begin{document}
+
+\title{Comparison in Concurrency Models}
+\author{
+    Christofer Washington Berruz Chungata \\ 
+    Karan Jain \\ 
+    Amey Makarand Dhongade \\ 
+    \\
+    San Jos\'{e} State University \\ 
+    CS 252 - Final Project
+}
+\date{May 12, 2025}
+
+\maketitle
+
+\begin{abstract}
+This project is very abstract
+\end{abstract}
+
+\section{Introduction\label{sec:introduction}}
+This is my introduction
+
+\section{Background\label{sec:background}}
+Background.
+
+\input{shared_memory.tex}
+\input{csp.tex}
+\input{stm.tex}
+
+% Bibliography
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
