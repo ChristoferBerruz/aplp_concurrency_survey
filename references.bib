@@ -15,3 +15,116 @@
   howpublished = {\url{https://web.mit.edu/6.005/www/fa14/classes/17-concurrency/}},
   note         = {Accessed: 2025-04-29}
 }
+@article{alseqyani2023historyOfConcurrency,
+  author  = {A. Alseqyani and A. Almutairi},
+  title   = {History and Future Trends of Multicore Computer Architecture},
+  journal = {International Journal of Computer Graphics \& Animation},
+  volume  = {13},
+  number  = {2},
+  pages   = {01--08},
+  year    = {2023},
+  month   = {Apr.},
+  doi     = {10.5121/ijcga.2023.13201}
+}
+
+@article{huang2016debuggingConcurrentPrograms,
+  author  = {J. Huang and C. Zhang},
+  title   = {Debugging Concurrent Software: Advances and Challenges},
+  journal = {Journal of Computer Science and Technology},
+  volume  = {31},
+  number  = {5},
+  pages   = {861--868},
+  year    = {2016},
+  month   = {Sep.},
+  doi     = {10.1007/s11390-016-1669-8}
+}
+
+@article{andrews1983conceptsOfConcurrency,
+  author  = {G. R. Andrews and F. B. Schneider},
+  title   = {Concepts and Notations for Concurrent Programming},
+  journal = {ACM Computing Surveys (CSUR)},
+  volume  = {15},
+  number  = {1},
+  pages   = {3--43},
+  year    = {1983},
+  month   = {Mar.},
+  doi     = {10.1145/356901.356903}
+}
+
+@inproceedings{armstrong2007historyOfErlang,
+  author    = {J. Armstrong},
+  title     = {A history of Erlang},
+  booktitle = {Proceedings of the third ACM SIGPLAN conference on History of programming languages},
+  year      = {2007},
+  month     = {Jun.},
+  doi       = {10.1145/1238844.1238850}
+}
+@inproceedings{jaffe2011impactOfMemoryModels,
+  author    = {Jaffe, Alexander and Moscibroda, Thomas and Effinger-Dean, Laura and Ceze, Luis and Strauss, Karin},
+  title     = {The impact of memory models on software reliability in multiprocessors},
+  year      = {2011},
+  isbn      = {9781450307192},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi-org.libaccess.sjlibrary.org/10.1145/1993806.1993819},
+  doi       = {10.1145/1993806.1993819},
+  abstract  = {The memory consistency model is a fundamental system property characterizing a multiprocessor. The relative merits of strict versus relaxed memory models have been widely debated in terms of their impact on performance, hardware complexity and programmability. This paper adds a new dimension to this discussion: the impact of memory models on software reliability. By allowing some instructions to reorder, weak memory models may expand the window between critical memory operations. This can increase the chance of an undesirable thread-interleaving, thus allowing an otherwise-unlikely concurrency bug to manifest. To explore this phenomenon, we define and study a probabilistic model of shared-memory parallel programs that takes into account such reordering. We use this model to formally derive bounds on the vulnerability to concurrency bugs of different memory models. Our results show that for 2 concurrent threads, weaker memory models do indeed have a higher likelihood of allowing bugs. On the other hand, we show that as the number of parallel, buggy threads increases, the gap between the different memory models becomes proportionally insignificant, and thus the importance of using a strict memory model diminishes.},
+  booktitle = {Proceedings of the 30th Annual ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing},
+  pages     = {89–98},
+  numpages  = {10},
+  keywords  = {weak ordering, total store order, software reliability, sequential consistency, probabilistic analysis, memory consistency models},
+  location  = {San Jose, California, USA},
+  series    = {PODC '11}
+}
+@inproceedings{10.1145/1508244.1508256,
+  author    = {Olszewski, Marek and Ansel, Jason and Amarasinghe, Saman},
+  title     = {Kendo: efficient deterministic multithreading in software},
+  year      = {2009},
+  isbn      = {9781605584065},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi-org.libaccess.sjlibrary.org/10.1145/1508244.1508256},
+  doi       = {10.1145/1508244.1508256},
+  abstract  = {Although chip-multiprocessors have become the industry standard, developing parallel applications that target them remains a daunting task. Non-determinism, inherent in threaded applications, causes significant challenges for parallel programmers by hindering their ability to create parallel applications with repeatable results. As a consequence, parallel applications are significantly harder to debug, test, and maintain than sequential programs.This paper introduces Kendo: a new software-only system that provides deterministic multithreading of parallel applications. Kendo enforces a deterministic interleaving of lock acquisitions and specially declared non-protected reads through a novel dynamically load-balanced deterministic scheduling algorithm. The algorithm tracks the progress of each thread using performance counters to construct a deterministic logical time that is used to compute an interleaving of shared data accesses that is both deterministic and provides good load balancing. Kendo can run on today's commodity hardware while incurring only a modest performance cost. Experimental results on the SPLASH-2 applications yield a geometric mean overhead of only 16\% when running on 4 processors. This low overhead makes it possible to benefit from Kendo even after an application is deployed. Programmers can start using Kendo today to program parallel applications that are easier to develop, debug, and test.},
+  booktitle = {Proceedings of the 14th International Conference on Architectural Support for Programming Languages and Operating Systems},
+  pages     = {97–108},
+  numpages  = {12},
+  keywords  = {debugging, determinism, deterministic multithreading, multicore, parallel programming},
+  location  = {Washington, DC, USA},
+  series    = {ASPLOS XIV}
+}
+@article{kendoEfficientDeterministicMultithreading,
+  author     = {Olszewski, Marek and Ansel, Jason and Amarasinghe, Saman},
+  title      = {Kendo: efficient deterministic multithreading in software},
+  year       = {2009},
+  issue_date = {March 2009},
+  publisher  = {Association for Computing Machinery},
+  address    = {New York, NY, USA},
+  volume     = {44},
+  number     = {3},
+  issn       = {0362-1340},
+  url        = {https://doi-org.libaccess.sjlibrary.org/10.1145/1508284.1508256},
+  doi        = {10.1145/1508284.1508256},
+  abstract   = {Although chip-multiprocessors have become the industry standard, developing parallel applications that target them remains a daunting task. Non-determinism, inherent in threaded applications, causes significant challenges for parallel programmers by hindering their ability to create parallel applications with repeatable results. As a consequence, parallel applications are significantly harder to debug, test, and maintain than sequential programs.This paper introduces Kendo: a new software-only system that provides deterministic multithreading of parallel applications. Kendo enforces a deterministic interleaving of lock acquisitions and specially declared non-protected reads through a novel dynamically load-balanced deterministic scheduling algorithm. The algorithm tracks the progress of each thread using performance counters to construct a deterministic logical time that is used to compute an interleaving of shared data accesses that is both deterministic and provides good load balancing. Kendo can run on today's commodity hardware while incurring only a modest performance cost. Experimental results on the SPLASH-2 applications yield a geometric mean overhead of only 16\% when running on 4 processors. This low overhead makes it possible to benefit from Kendo even after an application is deployed. Programmers can start using Kendo today to program parallel applications that are easier to develop, debug, and test.},
+  journal    = {SIGPLAN Not.},
+  month      = mar,
+  pages      = {97–108},
+  numpages   = {12},
+  keywords   = {debugging, determinism, deterministic multithreading, multicore, parallel programming}
+}
+@misc{rookout2021heisenbug,
+  author       = {O. W.},
+  title        = {What Is A Heisenbug: Full Guide - Rookout.com},
+  howpublished = {\url{https://www.rookout.com/blog/fantastic-bugs-and-how-to-resolve-them-ep1-heisenbugs/}},
+  month        = sep,
+  year         = {2021},
+  note         = {Accessed: 2025-04-29}
+}
+@inproceedings{gray1986whyComputersStop,
+  author    = {Gray, J.},
+  title     = {Why do computers stop and what can be done about it?},
+  booktitle = {Proceedings of the 5th Symposium on Reliability in Distributed Software and Database Systems},
+  year      = {1986},
+  month     = {Jan.},
+  pages     = {3--12}
+}
