@@ -66,9 +66,6 @@ due to the fact that most modern hardware can re-order instructions
 makes it difficult to reproduce bugs, creating \textit{Heisenbugs}~\cite{rookout2021heisenbug,
 gray1986whyComputersStop}.
 
-\subsection{Problems with Shared-Memory Models}
-
-
 %figure for the canonical example
 \begin{figure}[!htp]
     \centering
@@ -93,3 +90,44 @@ gray1986whyComputersStop}.
     \caption{Canonical example for shared-memory models.}
     \label{fig:lost_update}
 \end{figure}
+
+\subsection{Synchronization Mechanisms}
+Synchronization mechanisms aim to solve the problems caused by interleaving: race conditions.
+As the name implies, synchronization mechanisms synchronize the execution of multiple threads.
+The most common synchronization mechanisms include mutual exclusion, barriers,
+and atomic instructions~\cite{leroy2021sharedMemorySlides}. Note that message passing is a synchronization
+mechanism, but it is highly used in the Communicating Sequential Processes (CSP) model.
+
+Mutual exclusion is the most primitive synchronization mechanism.
+It allows only certain threads to access a shared object at a time.
+Locks, mutexes, and semaphores are examples of mutual exclusion mechanisms.
+The differences between these mechanisms are summarized in \autoref{tab:mutualExclusionPrimitives}.
+
+\begin{table}[!htp]
+    \caption{Comparison of mutual exclusion mechanisms}
+    \label{tab:mutualExclusionPrimitives}
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|X|}
+        \hline
+        \textbf{Mechanism} & \textbf{Description} & \textbf{Use Case} \\
+        \hline
+        Locks & 
+        Simples mechanism. Allows only one thread at a time to access a shared object& 
+        Used when only one thread needs access to a shared resource. \\
+        \hline
+        Mutexes & 
+        Similar to a lock, but it can used system wide to synchronize multiple processes. & 
+        Used for thread-safe operations where ownership of the lock is required. \\
+        \hline
+        Semaphores & 
+        Generalization over a lock: allow $N$ entities to access the resource at a time & 
+        Used when multiple threads need controlled access to a limited number of resources. \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+The biggest problem with mutual exclusion mechanisms is that they can
+lead to deadlocks when used incorrectly.
+A deadlock occurs when two or more threads are waiting
+for each other to release a resource, blocking \textbf{forever}.
+The responsibility of avoiding deadlocks falls directly on the developer.
