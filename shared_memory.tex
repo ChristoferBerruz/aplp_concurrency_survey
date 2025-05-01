@@ -94,14 +94,21 @@ gray1986whyComputersStop}.
 \subsection{Synchronization Mechanisms}
 Synchronization mechanisms aim to solve the problems caused by interleaving: race conditions.
 As the name implies, synchronization mechanisms synchronize the execution of multiple threads.
-The most common synchronization mechanisms include mutual exclusion, barriers,
+These mechanism are used in the critical sections of a program.
+The most common synchronization mechanisms include synchronization primitives,
 and atomic instructions~\cite{leroy2021sharedMemorySlides}. Note that message passing is a synchronization
 mechanism, but it is highly used in the Communicating Sequential Processes (CSP) model.
 
-Mutual exclusion is the most primitive synchronization mechanism.
-It allows only certain threads to access a shared object at a time.
-Locks, mutexes, and semaphores are examples of mutual exclusion mechanisms.
-The differences between these mechanisms are summarized in \autoref{tab:mutualExclusionPrimitives}.
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Critical Section]
+    Critical sections are a series of instructions in a program that cannot
+    be interleaved among multiple threads to guarantee the correctness of the program.
+\end{tcolorbox}
+
+Synchronization primitives allow
+only certain threads to access a shared object at a time.
+Locks, mutexes, semaphores, barriers, conditional variables, and monitors
+are examples of synchronization primitives.
+These mechanism are briefly described in \autoref{tab:mutualExclusionPrimitives}.
 
 \begin{table}[!htp]
     \caption{Comparison of mutual exclusion mechanisms}
@@ -109,25 +116,99 @@ The differences between these mechanisms are summarized in \autoref{tab:mutualEx
     \centering
     \begin{tabularx}{\textwidth}{|l|X|X|}
         \hline
-        \textbf{Mechanism} & \textbf{Description} & \textbf{Use Case} \\
+        \textbf{Primitive} & \textbf{Description}\\
         \hline
         Locks & 
-        Simples mechanism. Allows only one thread at a time to access a shared object& 
-        Used when only one thread needs access to a shared resource. \\
+        Simples mechanism. Allows only one thread at a time to access a shared object.\\
         \hline
         Mutexes & 
-        Similar to a lock, but it can used system wide to synchronize multiple processes. & 
-        Used for thread-safe operations where ownership of the lock is required. \\
+        Similar to a lock, but it can used system wide to synchronize multiple processes.\\
         \hline
         Semaphores & 
-        Generalization over a lock: allow $N$ entities to access the resource at a time & 
-        Used when multiple threads need controlled access to a limited number of resources. \\
+        Generalization over a lock: allow $N$ entities to access the resource at a time\\
+        \hline
+        Barriers &
+        Given $N$ threads, all threads block until $P$ threads reach a section.\\
+        \hline
+        Conditional variables &
+        Allows threads to wait for a condition to be true. Enhancement
+        over semaphores with wait and signal operations.\\
+        \hline
+        Monitors &
+        High-level abstraction over locks and condition variables. It packages
+        the shared object and the synchronization primitives together.\\
         \hline
     \end{tabularx}
 \end{table}
 
-The biggest problem with mutual exclusion mechanisms is that they can
-lead to deadlocks when used incorrectly.
+The biggest problem with synchronization primitives is that they can
+lead to deadlocks when used incorrectly. Note that
+the responsibility of avoiding deadlocks falls directly on the developer.
 A deadlock occurs when two or more threads are waiting
 for each other to release a resource, blocking \textbf{forever}.
-The responsibility of avoiding deadlocks falls directly on the developer.
+When a deadlock occurs, the \textit{progress} property
+of the system is violated. All synchronization mechanisms aim
+at guaranteeing some of these three properties:
+mutual exclusion, progress, and bounded waiting~\cite{csf2025synchronizationPrimitives}.
+
+
+Given that it is difficult to not only know which synchronization
+primitives to used, but also how to use them correctly,
+several well-known patterns exist to create
+correct concurrent programs: signaling,
+turnstiles, rendezvous, multiplexes, and lightswitches~\cite{csf2025synchronizationDesign}.
+
+\subsection{Memory Consistency Models}
+One subtle implication of shared-memory models is that instructions
+from all threads must be organized in \textbf{some order}. The reason is straightforward:
+they are all accessing the same memory. Given that memory is unique and shared (hardware resource),
+multiple threads cannot access the same memory address at the same time. Note that
+we make the distinction between instructions and lines of code. The instructions
+can be arranged in any order, regardless of how the lines of code are written.
+
+A memory consistency model defines the set of rules that dictate how
+instruction can be ordered, or interleaved, in a concurrent
+program~\cite{bornholt2016memoryModels,jaffe2011impactOfMemoryModels}.
+In concrete, the ordering rules focus on how \textbf{load} and \textbf{store} instructions
+can be reordered. A load instruction reads a value from memory,
+while a store instruction writes a value to memory.
+
+Sequential Consistency (SC) is the strongest
+and most intuitive model ~\cite{lamport1979multiprocessor}.
+To guarantee SC, the system must ensure two properties~\cite{jaffe2011impactOfMemoryModels}:
+\begin{enumerate}
+    \item All threads must see the global order of memory operations.
+    \item the operations of a particular property must appear to execute
+    in program order.
+\end{enumerate}
+
+Although SC is extremely popular due to its high-level of abstraction,
+its strictness is detrimental to performance because it limits
+optimizations around memory access including caching,
+dynamic scheduling, and pipelining. As a result, several relaxed
+memory consistency models have been proposed:
+Total Store Order (TSO), Partial Store Order (PSO),
+and Weak Ordering (WO)~\cite{jaffe2011impactOfMemoryModels}.
+Note that most modern hardware architectures implement a relaxed
+memory consistency model, with Intel's x86 architecture implementing TSO~\cite{cox2021hardwareMemoryModels}.
+
+Recall that the canonical example in \autoref{fig:lost_update}
+demonstrates the interleaving problem. Given that memory
+consistency models define how instructions can be rearranged,
+they can either exacerbate or mitigate concurrency bugs
+caused by undesirable interleaving.
+
+The authors in~\cite{jaffe2011impactOfMemoryModels} show that
+as the number of threads increases, the probability
+of a concurrency bug manifesting is the same across strict and relaxed
+memory consistency models. However, when two threads are used,
+weak memory models do increase such probability. The experiment setup
+is pretty straightforward: given a critical section for a program
+similar to \autoref{fig:lost_update}, and a
+memory consistency model, the authors are able to possibly
+expand the critical window by reordering instructions.
+Then, they are able to measure the probability of a concurrency
+by taking into factoring in the size of the critical window
+in their probabilistic model.
+Note that these findings are not experimental, but rather
+mathematically proven.
