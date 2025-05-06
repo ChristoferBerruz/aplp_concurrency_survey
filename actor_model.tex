@@ -15,7 +15,9 @@ The authors in [12] have also discussed regarding certain principles implemented
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{|c|c|}
+    \caption{Basic Components of the Actor Model}
+    \label{tab:actor_model}
+    \begin{tabularx}{\textwidth}{|l|X|X|}
         \hline
         \textbf{Principle} & \textbf{Description} \\
         \hline
@@ -28,9 +30,7 @@ The authors in [12] have also discussed regarding certain principles implemented
         Indeterminacy & Messages may arrive in any order \\
         \hline
         
-    \end{tabular}
-    \caption{Basic Components of the Actor Model}
-    \label{tab:actor_model}
+    \end{tabularx}
 \end{table}
 
 \subsection{Data Races and Deadlocks}
@@ -52,7 +52,7 @@ The authors in \cite{8892329} conducted various experiments using different libr
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|p{5cm}|p{5cm}|}
+    \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
         \hline
         \textbf{Benchmark} & \textbf{What it Measured} & \textbf{Main Finding} \\
         \hline
@@ -66,7 +66,7 @@ The authors in \cite{8892329} conducted various experiments using different libr
         \hline
         Chameneos Benchmark & Handling complex meeting and communication scenarios among actors. & Scalaz outperformed Akka and Lift in this concurrency problem. \\
         \hline
-    \end{tabular}
+    \end{tabularx}
     \caption{Benchmarks conducted and key findings from actor system implementations.}
     \label{tab:benchmarks_conducted}
 \end{table}
