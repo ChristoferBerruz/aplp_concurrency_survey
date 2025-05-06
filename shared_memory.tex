@@ -258,3 +258,60 @@ by taking into factoring in the size of the critical window
 in their probabilistic model.
 Note that these findings are not experimental, but rather
 mathematically proven.
+
+
+\subsection{Non-Determinism}
+
+Non-Determinism is the property of a system
+where given the same inputs, the system
+reaches different states or produces
+a different output~\cite{replayDeterminism}.
+In shared-memory concurrency models, determinism can be divided in two:
+
+\begin{enumerate}
+    \item \textbf{Strong determinism:} All shared memory accesses are deterministically ordered.
+    \item \textbf{Weak determinism:} Only the order of lock acquisitions is deterministic.
+        This is often referred to as strong determinism for race-free programs.
+\end{enumerate}
+
+Shared-memory concurrency programs are susceptible
+to exhibit non-deterministic behavior due to
+non-deterministic memory access patterns
+or lack and incorrect usage of synchronization mechanisms.
+These qualities are undesirable when triaging
+and fixing bugs in concurrent programs as
+creating a minimal reproducible setup which
+yields the same failure is invaluable for developers.
+Otherwise, developers have to reason about the system
+by reading lines of code and attempting
+to understand how the systems behaves at runtime. This
+approach is not useful when programming a concurrent
+program already poses challenges. As a result, several strategies have been proposed
+to address the non-determinism nature of
+shared-memory concurrent programs.
+
+On one hand, the authors
+in~\cite{replayDeterminism} proposed a replay system.
+Replay is ability to replicate the steps performed by a system.
+Different than having log files, replay allows to examine
+stack traces and perform runtime analysis of a previous run.
+One interesting aspect of~\cite{replayDeterminism} is that all
+events are logged using the same trace mechanism. By doing so,
+the runtime overhead is reduced as the instrumentation no longer
+needs to distinguish between event types.
+
+On the other hand, authors in~\cite{kendoEfficientDeterministicMultithreading}
+introduced Kendo, a C++ software-only system that enforces
+deterministic multithreading. One disadvantage
+of replay/record systems is that they are costly or infeasible
+to maintain post-deployment. Furthermore,
+hardware oriented solutions to achieve determinism,
+such as the ones proposed in ~\cite{hardwareDeterminism},
+are too restrictive because they limit performance
+optimizations. Kendo introduces the notion of Deterministic
+Logical Time (DLT) where each thread maintains a logical
+clock that advances only based in its own actions.
+If a thread is using DLT, it must wait no only
+the resource to be marked as free but also for its
+DLT to become current. Kendo forwards a threads DLT
+if possible to avoid wait time.
