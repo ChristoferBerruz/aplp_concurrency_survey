@@ -203,5 +203,23 @@
   pages={127-131},
   keywords={Computational modeling;Biological system modeling;Libraries;Benchmark testing;Message systems;Java;Information technology;Actor Model;Performance;actor mailboxes},
   doi={10.1109/ELIT.2019.8892329}}
-
+@article{10.1145/249069.231432,
+  author     = {Russinovich, Mark and Cogswell, Bryce},
+  title      = {Replay for concurrent non-deterministic shared-memory applications},
+  year       = {1996},
+  issue_date = {May 1996},
+  publisher  = {Association for Computing Machinery},
+  address    = {New York, NY, USA},
+  volume     = {31},
+  number     = {5},
+  issn       = {0362-1340},
+  url        = {https://doi.org/10.1145/249069.231432},
+  doi        = {10.1145/249069.231432},
+  abstract   = {Replay of shared-memory program execution is desirable in many domains including cyclic debugging, fault tolerance and performance monitoring. Past approaches to repeatable execution have focused on the problem of re-executing the shared-memory access patterns in parallel programs. With the proliferation of operating system supported threads and shared memory for uniprocessor programs, there is a clear need for efficient replay of concurrent applications. The solutions for parallel systems can be performance prohibitive when applied to the uniprocessor case. We present an algorithm, called the repeatable scheduling algorithm, combining scheduling and instruction counts to provide an invariant for efficient, language independent replay of concurrent shared-memory applications. The approach is shown to have trace overheads that are independent of the amount of sharing that takes place. An implementation for cyclic debugging on Mach 3.0 is evaluated and benchmarks show typical performance overheads of around 10\%. The algorithm implemented is compared with optimal event-based tracing and shown to do better with respect to the number of events monitored or number of events logged, in most cases by several orders of magnitude.},
+  journal    = {SIGPLAN Not.},
+  month      = may,
+  pages      = {258–266},
+  numpages   = {9},
+  keywords   = {instruction counter, non-determinism, repeatable execution, shared memory}
+}
 

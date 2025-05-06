@@ -157,6 +157,52 @@ primitives to used, but also how to use them correctly,
 several well-known patterns exist to create
 correct concurrent programs: signaling,
 turnstiles, rendezvous, multiplexes, and lightswitches~\cite{csf2025synchronizationDesign}.
+Please refer to \autoref{tab:basicDesignPattens} for a summary.
+
+
+% Table for summarizing basic synchronization design patterns
+\begin{table}[!htp]
+    \caption{Summary of basic synchronization design patterns}
+    \label{tab:basicDesignPattens}
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|X|}
+        \hline
+        \textbf{Pattern} & \textbf{Description}\\
+        \hline
+        Signaling & 
+        Use mutexes as a form of signal between two processes. This is
+        accomplished by waiting on a shared semaphore that is incremented
+        right after the event. Once the semaphore is incremented, the
+        the waiting thread can continue execution.\\
+        \hline
+        Turnstiles & 
+        A variant of signaling that can can unblock several threads
+        one at a time in a chain-reaction style. Threads wait
+        and notify signals one at a time, such that other threads
+        can continue execution.\\
+        \hline
+        Rendezvous & 
+        Two threads can signal each other such that they meet
+        in a pre-defined point. Two semaphores are needed. Assuming
+        semaphores $A, B$ exist. Thread A signals on semaphore $B$ and
+        waits on semaphore $A$. Thread B does the same.\\
+        \hline
+        Multiplexing &
+        Used when mutual exclusion is not required, but some
+        degree of resource management is needed. It works
+        by allowing $N$ threads to access a resource at a time.
+        Any other thread must wait.\\
+        \hline
+        Lightswitches &
+        Used when threads can be distinguished by some
+        type. For example, threads that perform writes to
+        a document and threads that perform I/O of the document
+        into disk. Lightswitches allows to synchronize
+        threads based on type.\\
+        \hline
+    \end{tabularx}
+\end{table}
+
 
 \subsection{Memory Consistency Models}
 One subtle implication of shared-memory models is that instructions
