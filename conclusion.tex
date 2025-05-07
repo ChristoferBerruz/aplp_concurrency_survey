@@ -38,3 +38,20 @@ and the lack of a “killer app” cemented STM’s decline.
 Each community made reasonable choice: either optimize
 around STM or pivot to alternatives better suited.
 It is not a Swiss Army knife, but a scalpel for specific use cases.
+
+Although the actor model provides a clear conceptual framework encapsulating state 
+within independent actors and communicating solely via asynchronous messages, 
+it is not without its challenges. Message ordering is inherently 
+non-deterministic, making subtle bugs difficult to reproduce. 
+Developers must experiment with supervision hierarchies, 
+mailbox sizing, back-pressure strategies, and failure propagation 
+patterns to ensure correct, performant behavior. Each of these 
+constructs, while powerful, adds cognitive overhead, and integrating 
+actor-based designs with legacy synchronous I/O or shared-memory libraries 
+can introduce additional friction. Under heavy load, the serialization and 
+queueing of messages may also incur performance overhead that requires careful 
+tuning of dispatchers and routing strategies. In production, mature frameworks 
+like Akka on the JVM, show how the actor model can yield highly available, 
+fault-tolerant systems with dynamic scaling and location transparency. Their 
+ecosystems offer robust tooling for monitoring, clustering, and supervised 
+restarts, and their communities value the model’s composability and resilience. 
