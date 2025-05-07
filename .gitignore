@@ -45,3 +45,7 @@
 # Temporary files
 *.tmp
 *.temp
+
+# project.* files except for project.tex
+project.*
+!project.tex
