@@ -24,3 +24,17 @@ have been multiple attempts to improve determinism in SM models
 including replay/record systems, hardware determinism,
 and software only determinism framework relying on 
 Deterministic Logical Time.
+
+STM remains an elegant concurrency model and it
+continues to be supported (implemented), notably by Haskell and Clojure.
+In these environments, immutability and strong typing compliment STM’s complexity,
+and the smaller and academically minded community is comfortable with its cost
+in exchange for composability and safety. In more conventional and corporate
+backed ecosystems like .NET, Python or JVM, STM has largely been sidelined
+in favor of established models like that of task-actor-message models;
+ones that align with the easier idioms and tooling.
+Performance considerations, difficulty with I/O and legacy code,
+and the lack of a “killer app” cemented STM’s decline.
+Each community made reasonable choice: either optimize
+around STM or pivot to alternatives better suited.
+It is not a Swiss Army knife, but a scalpel for specific use cases.
