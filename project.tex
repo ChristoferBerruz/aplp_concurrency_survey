@@ -48,7 +48,26 @@ This project is very abstract
 \section{Introduction\label{sec:introduction}}
 This is my introduction
 
-Concurrency in modern software systems needs abstractions that simplify reasoning and fully exploit distributed architectures as discussed in \cite{10.1145/357980.358021} . The Actor Model provides an abstraction by encapsulating state with independent actors that communicate only through asynchronous messaging. Each actor processes one message at a time from its mailbox, preventing data races and deadlocks. Strict encapsulation ensures that only the actor itself can read or update its internal state, thus not  needing locks. By decoupling senders and receivers, asynchronous messaging removes head-of-line blocking and allows flexible scheduling. Optimized mailbox implementations—ranging from lock-free, unbounded queues in Scalaz to bounded, configurable mailboxes in Akka tune enqueue and dequeue performance under varying workloads. Work-stealing dispatchers, such as those provided by Grand Central Dispatch or the fork-join pool, adapt automatically and balance load without manual thread management. This survey examines how mailbox structures, dispatcher strategies, and actor hierarchies interact to optimize scalability, fault tolerance, and programmability in actor-based systems.
+Concurrency in modern software systems needs abstractions
+that simplify reasoning and fully exploit distributed
+architectures as discussed in \cite{10.1145/357980.358021}.
+The Actor Model provides an abstraction by encapsulating state
+with independent actors that communicate only through
+asynchronous messaging. Each actor processes one message
+at a time from its mailbox, preventing data races and deadlocks.
+Strict encapsulation ensures that only the actor itself can read
+or update its internal state, thus not  needing locks.
+By decoupling senders and receivers, asynchronous messaging
+removes head-of-line blocking and allows flexible scheduling.
+Optimized mailbox implementations—ranging from lock-free,
+unbounded queues in Scalaz to bounded,
+configurable mailboxes in Akka tune enqueue and dequeue
+performance under varying workloads. Work-stealing dispatchers,
+such as those provided by Grand Central Dispatch or the fork-join pool,
+adapt automatically and balance load without manual thread management.
+This survey examines how mailbox structures, dispatcher strategies,
+and actor hierarchies interact to optimize scalability, fault tolerance,
+and programmability in actor-based systems.
 
 \section{Background\label{sec:background}}
 Background.
