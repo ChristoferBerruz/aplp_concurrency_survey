@@ -4,7 +4,7 @@ An actor model is a type of concurrency model where the individual workers are t
 \subsection{Understanding the Actor Model Design}
 The authors in \cite{8316391} discuss the actor model design by first introducing the actor context. The actor context is the environment where the actors live. It creates actors, tracks them, routes messages to the right actor's mailbox.  The actor is the main unit of work done, in which each actor has a private state, has a mailbox attached, can send messages to other actors and process messages. The mailbox is where the incoming messages for the actor are stored. Processing is not done immediately, but whenever ready, the actor picks up a message from its mailbox and processes it. 
 The actor model is illustrated in figure 3. 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{actor.png}
     \caption{Actors communicating with other actors.}
@@ -12,26 +12,27 @@ The actor model is illustrated in figure 3.
 \end{figure}
 \subsection{The Actor Model Principle}
 The authors in [12] have also discussed regarding certain principles implemented in the actor model.
+Please refer to table 3 to understand the principles.
 
-\begin{table}[!htp]
-    \centering
-    \caption{Basic Components of the Actor Model}
-    \label{tab:actor_model}
-    \begin{tabularx}{\textwidth}{|l|X|X|}
-        \hline
-        \textbf{Principle} & \textbf{Description} \\
-        \hline
-        Encapsulation & Each actor has a private internal state, and no actor can view it \\
-        \hline
-        Internal State & Each actor has its own memory and updates it. \\
-        \hline
-        Messaging & Actors communicate by sending and receiving \\
-        \hline
-        Indeterminacy & Messages may arrive in any order \\
-        \hline
-        
-    \end{tabularx}
+\begin{table}[H]           % note the capital H
+  \centering
+  \caption{Basic Components of the Actor Model}
+  \label{tab:actor_model}
+  \begin{tabularx}{\textwidth}{|l|X|}
+    \hline
+    \textbf{Principle} & \textbf{Description} \\
+    \hline
+    Encapsulation  & Each actor has a private internal state, and no actor can view it.  \\
+    \hline
+    Internal State & Each actor has its own memory and updates it.      \\
+    \hline
+    Messaging      & Actors communicate by sending and receiving.        \\
+    \hline
+    Indeterminacy  & Messages may arrive in any order.                   \\
+    \hline
+  \end{tabularx}
 \end{table}
+
 
 \subsection{Data Races and Deadlocks}
 A data race occurs when when two or more threads access the same shared memory at the same time, which can corrupt the data. A deadlock occurs when two or more threads are waiting for each other to release a lock and so the system freezes. 
@@ -72,7 +73,6 @@ The authors in \cite{8892329} conducted various experiments using different libr
 \end{table}
 
 For pure speed, Scalaz is best for lightweight, fast concurrent systems. But for building robust, distributed systems, Akka is better becauser it offers more built-in tools as well as a good actor lifecycle management and for building complex and fault tolerant systems
-
 
 
 
