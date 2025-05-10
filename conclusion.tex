@@ -3,27 +3,17 @@ In this survey we described the Shared-Memory (SM),
 Actor-Model (AM), and Software Transactional Memory (STM)
 concurrency models.
 
-Although the SM concurrency model is the
-easiest form of concurrency that a programming language
-can support, it is also plagued with disadvantage.
-Synchronization primitives, useful to create
-correct programs and protect critical sections, can be
-misused by developers leading to deadlocks. Even though
-several design patterns exists, including mutexes, turnstiles,
-and rendezvous, these patterns impose an extra
-complexity later. Furthermore, it is
-the responsibility
-of the developer to choose which pattern to use depending
-on the problem. Even seemingly correct concurrent programs
-can have bugs. In the SM concurrency models, these bugs
-are hard to reproduce given the interleaving problem
-caused by different memory consistency models at the compiler
-or Operating System level. One primary cause of the lack
-of reproducibility is the lack of determinism. In this area, there
-have been multiple attempts to improve determinism in SM models
-including replay/record systems, hardware determinism,
-and software only determinism framework relying on 
-Deterministic Logical Time.
+The Shared-Memory (SM) concurrency model
+is simple to implement but prone to challenges like deadlocks,
+non-determinism, and debugging complexity.
+While synchronization primitives and design patterns
+such as mutexes and turnstiles help manage critical sections,
+they add complexity and rely heavily on developers' correct usage.
+Bugs in SM systems are often difficult to reproduce due to
+interleaving issues and varying memory consistency models.
+Efforts to improve determinism, such as replay systems and
+deterministic frameworks, aim to address these challenges,
+making SM concurrency more predictable and manageable.
 
 STM remains an elegant concurrency model and it
 continues to be supported (implemented), notably by Haskell and Clojure.
