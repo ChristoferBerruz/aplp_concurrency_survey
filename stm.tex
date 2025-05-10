@@ -3,7 +3,7 @@ As introduced earlier, STM is a concurrency control mechanism that allows multip
 \subsection{Haskell}
 Haskell has a strong emphasis on immutability and pure functions. This makes it an ideal candidate for STM, as it allows for easier reasoning about concurrent programs.  Haskell is purely functional with a strong type system; most data is immutable, and the side-effects including I/O are tightly controlled by monads. 
 
-\begin{longtable}{|p{0.2\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
+\begin{longtable}{|p{0.25\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
     \caption{Design choices for Haskell STM} \label{tab:Haskell-STM Design Choices} \\
     \hline
     \textbf{Design Primitive} & \textbf{Associated Hazards} & \textbf{Reason for Use} \\
