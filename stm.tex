@@ -1,5 +1,5 @@
 \section{Software Transaction Memory\label{sec:stm}}
-As introduced earlier, STM is a concurrency control mechanism that allows multiple threads to access shared memory in a way that avoids the need for locks.This section will provide a survey of various STM implementations, the design choices - the problems it aims to solve, and its advantages and disadvantages.
+As introduced earlier, STM is a concurrency control mechanism that allows multiple threads to access shared memory in a way that avoids the need for locks. This section will provide a survey of various STM implementations, the design choices, the problems it aims to solve, its advantages, and disadvantages.
 \subsection{Haskell}
 Haskell has a strong emphasis on immutability and pure functions. This makes it an ideal candidate for STM, as it allows for easier reasoning about concurrent programs.  Haskell is purely functional with a strong type system; most data is immutable, and the side-effects including I/O are tightly controlled by monads. 
 
