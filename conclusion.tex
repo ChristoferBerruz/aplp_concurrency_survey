@@ -1,16 +1,22 @@
 \section{Conclusion\label{sec:conclusion}}
 In this survey we described the Shared-Memory (SM),
 Actor-Model (AM), and Software Transactional Memory (STM)
-concurrency models.
+concurrency models. We focused on
+the motivation, design, implementation, challenges,
+and advantages of each model. The goal of this survey
+was to describe these models to help readers
+understand the complexities, pitfalls, and options
+available when writing concurrent programs.
 
 The Shared-Memory (SM) concurrency model
 is simple to implement but prone to challenges like deadlocks,
 non-determinism, and debugging complexity.
 While synchronization primitives and design patterns
 such as mutexes and turnstiles help manage critical sections,
-they add complexity and rely heavily on developers' correct usage.
+they add complexity and rely heavily on programmers' correct usage.
 Bugs in SM systems are often difficult to reproduce due to
-interleaving issues and varying memory consistency models.
+interleaving issues and varying memory consistency models
+depending on hardware, compiler, or runtime.
 Efforts to improve determinism, such as replay systems and
 deterministic frameworks, aim to address these challenges,
 making SM concurrency more predictable and manageable.
