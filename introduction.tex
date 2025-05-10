@@ -16,7 +16,21 @@ follow a given concurrency model. The following survey aims to describe
 and compared the Shared-Memory, Actor-Model, and Software Transactional Memory
 concurrency models.
 
-Furthermore, concurrency in modern software systems needs abstractions
+In Section~\ref{sec:shared_memory},
+we describe the Shared-Memory concurrency model,
+where processes or threads communicate by reading and writing
+to shared memory.
+Furthermore, this section discusses 
+synchronization primitives such as locks, semaphores,
+and monitors to address race conditions and deadlocks.
+Additionally, this section explains memory consistency models,
+their impact on instruction ordering,
+and strategies like deterministic multithreading
+and replay systems to mitigate
+non-determinism in shared-memory systems.
+
+Although concurrent programs can be written using the SM concurrency
+model, concurrency in modern software systems needs abstractions
 that simplify reasoning and fully exploit distributed
 architectures as discussed in \cite{10.1145/357980.358021}.
 The Actor Model provides an abstraction by encapsulating state
