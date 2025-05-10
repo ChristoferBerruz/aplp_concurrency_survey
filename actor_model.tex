@@ -2,8 +2,8 @@
 An actor model is a type of concurrency model where the individual workers are the actors. An actor is an independent worker which has its own private state. Actors communicate by sending and receiving asynchronous messages. Each actor processes exactly one message at a time.
 
 \subsection{Understanding the Actor Model Design}
-The authors in \cite{8316391} discuss the actor model design by first introducing the actor context. The actor context is the environment where the actors live. It creates actors, tracks them, routes messages to the right actor's mailbox.  The actor is the main unit of work done, in which each actor has a private state, has a mailbox attached, can send messages to other actors and process messages. The mailbox is where the incoming messages for the actor are stored. Processing is not done immediately, but whenever ready, the actor picks up a message from its mailbox and processes it. 
-The actor model is illustrated in figure 3. 
+The authors in~\cite{8316391} discuss the actor model design by first introducing the actor context. The actor context is the environment where the actors live. It creates actors, tracks them, routes messages to the right actor's mailbox.  The actor is the main unit of work done, in which each actor has a private state, has a mailbox attached, can send messages to other actors and process messages. The mailbox is where the incoming messages for the actor are stored. Processing is not done immediately, but whenever ready, the actor picks up a message from its mailbox and processes it. 
+The actor model is illustrated in Figure~\ref{fig:actor}. 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{actor.png}
@@ -41,14 +41,14 @@ Data races don't occur in the actor model because there is no shared memory betw
 Deadlocks don't occur in the actor model as there is asynchronous messaging without any locks. Actors send a message and move on without waiting or blocking. In this no actor is waiting or holding a lock to release a resource.
 
 \subsection{Optimization using Batch Actors}
-The authors in \cite{10820772} introduced batch actors to tackle the problem where hundreds of thousands of small tasks all try to synchronize through one actor, which can lead to a communication bottleneck.
+The authors in~\cite{10820772} introduced batch actors to tackle the problem where hundreds of thousands of small tasks all try to synchronize through one actor, which can lead to a communication bottleneck.
 
 Instead of using one main actor executing thousands of tasks, several tasks are grouped under batch actors, and batch actors message the main job actor, which leads to a reduce in contention. 
 
 The experiments had shown that the models were 4x faster than the actor model without batching and resulted in less communication bottlenecks and better scaling.
 
 \subsection{Benchmarks conducted}
-The authors in \cite{8892329} conducted various experiments using different libraries implementing the actor model. These were the findings:
+The authors in~\cite{8892329} conducted various experiments using different libraries implementing the actor model. These were the findings:
 
 \begin{table}[!htp]
     \centering
