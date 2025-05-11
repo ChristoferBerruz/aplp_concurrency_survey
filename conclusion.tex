@@ -1,0 +1,53 @@
+\section{Conclusion\label{sec:conclusion}}
+In this survey we described the Shared-Memory (SM),
+Actor-Model (AM), and Software Transactional Memory (STM)
+concurrency models. We focused on
+the motivation, design, implementation, challenges,
+and advantages of each model. The goal of this survey
+was to describe these models to help readers
+understand the complexities, pitfalls, and options
+available when writing concurrent programs.
+
+The Shared-Memory (SM) concurrency model
+is simple to implement but prone to challenges like deadlocks,
+non-determinism, and debugging complexity.
+While synchronization primitives and design patterns
+such as mutexes and turnstiles help manage critical sections,
+they add complexity and rely heavily on programmers' correct usage.
+Bugs in SM systems are often difficult to reproduce due to
+interleaving issues and varying memory consistency models
+depending on hardware, compiler, or runtime.
+Efforts to improve determinism, such as replay systems and
+deterministic frameworks, aim to address these challenges,
+making SM concurrency more predictable and manageable.
+
+STM remains an elegant concurrency model and it
+continues to be supported (implemented), notably by Haskell and Clojure.
+In these environments, immutability and strong typing compliment STM’s complexity,
+and the smaller and academically minded community is comfortable with its cost
+in exchange for composability and safety. In more conventional and corporate
+backed ecosystems like .NET, Python or JVM, STM has largely been sidelined
+in favor of established models like that of task-actor-message models;
+ones that align with the easier idioms and tooling.
+Performance considerations, difficulty with I/O and legacy code,
+and the lack of a “killer app” cemented STM’s decline.
+Each community made reasonable choice: either optimize
+around STM or pivot to alternatives better suited.
+It is not a Swiss Army knife, but a scalpel for specific use cases.
+
+Although the actor model provides a clear conceptual framework encapsulating state 
+within independent actors and communicating solely via asynchronous messages, 
+it is not without its challenges. Message ordering is inherently 
+non-deterministic, making subtle bugs difficult to reproduce. 
+Developers must experiment with supervision hierarchies, 
+mailbox sizing, back-pressure strategies, and failure propagation 
+patterns to ensure correct, performant behavior. Each of these 
+constructs, while powerful, adds cognitive overhead, and integrating 
+actor-based designs with legacy synchronous I/O or shared-memory libraries 
+can introduce additional friction. Under heavy load, the serialization and 
+queueing of messages may also incur performance overhead that requires careful 
+tuning of dispatchers and routing strategies. In production, mature frameworks 
+like Akka on the JVM, show how the actor model can yield highly available, 
+fault-tolerant systems with dynamic scaling and location transparency. Their 
+ecosystems offer robust tooling for monitoring, clustering, and supervised 
+restarts, and their communities value the model’s composability and resilience. 

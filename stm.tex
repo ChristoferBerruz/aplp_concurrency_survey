@@ -1,67 +1,71 @@
 \section{Software Transaction Memory\label{sec:stm}}
-As introduced earlier, STM is a concurrency control mechanism that allows multiple threads to access shared memory in a way that avoids the need for locks.This section will provide a survey of various STM implementations, the design choices - the problems it aims to solve, and its advantages and disadvantages.
+As introduced earlier, STM is a concurrency control mechanism that allows multiple threads to access shared memory in a way that avoids the need for locks. This section will provide a survey of various STM implementations, the design choices, the problems it aims to solve, its advantages, and disadvantages.
 \subsection{Haskell}
 Haskell has a strong emphasis on immutability and pure functions. This makes it an ideal candidate for STM, as it allows for easier reasoning about concurrent programs.  Haskell is purely functional with a strong type system; most data is immutable, and the side-effects including I/O are tightly controlled by monads. 
 
-\begin{table}[!htp]
-    \caption{Design choices for Haskell STM}
-    \label{tab:Haskell-STM Design Choices}
-    \centering
-    \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
-        \hline
-        \textbf{Design Primitive}&	\textbf{Associated Hazards} & \textbf{Reason for Use}\\
-        \hline
-        \codeify{TVar} & 
-        Memory overhead from versioning; restricted mutation outside transactions &	
-        Enables optimistic concurrency control while maintaining type safety. Prevents direct access to shared state outside transactions\\
-        \hline
-        \codeify{retry} &
-        Indefinite blocking if dependencies never change &
-        Automatically restarts transactions only when relevant state changes, avoiding busy waiting. Enabled by dependency tracking via TVar versioning\\
-        \hline
-        \codeify{orElse} &
-        Increased contention if alternatives access overlapping TVars &	
-        Allows composable transaction alternatives without manual coordination. Reduces need for nested exception handling\\
-        \hline
-        \codeify{type-enforced STM/I/O separation} &
-        Limits expressiveness (no I/O in transactions) &
-        Ensures transactions remain rollback-safe. Leverages Haskell's purity to avoid irreversible side effects\\
-        \hline
-        \codeify{optimistic concurrency (no locks)} &
-        High retry rates under contention &	
-        Avoids lock acquisition overhead in common cases. Aligns with Haskell's allocation-heavy workloads where conflicts are rare\\
-        \hline
-        \codeify{per-thread transaction logs} &	
-        Memory overhead scaling with thread count &	
-        Enables lock-free progress guarantee: at least one thread always commits without global synchronization\\
-        \hline
-        \break
-        \codeify{global version clock} &
-        Clock overflow risk (64-bit memory address space) &
-        Provides a consistent view of shared state across threads. Avoids global synchronization for version updates\\
-        \hline
-        \codeify{phase-fair reader/writer locks} &
-        Priority inversion in contended writes &
-        Ensures progress for both readers and writers. Critical for real-time systems using STM\\
-        \hline
-        \codeify{eager conflict detection} &
-        False positives in long transactions &
-        Minimizes wasted work by aborting early. Complements optimistic approach by failing fast\\
-        \hline
-        \codeify{block-structured heap} &
-        Memory fragmentation from large objects &
-        Enables efficient parallel GC. Allows STM metadata (TVar versions) to coexist with regular objects\\
-        \hline
-        \codeify{cooperative multitasking} &
-        STM deadlocks in allocation-free loops &
-        Avoids OS thread overhead. Mitigated by -fomit-yields flag inserting yield points\\
-        \hline
-        \codeify{blackhole-based thunk evaluation} &
-        Duplicated computation in races &
-        Prevents multiple threads evaluating same thunk. Uses CAS for thread-safe lazy evaluation\\
-        \hline
-    \end{tabularx}
-\end{table}
+\begin{longtable}{|p{0.25\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
+    \caption{Design choices for Haskell STM} \label{tab:Haskell-STM Design Choices} \\
+    \hline
+    \textbf{Design Primitive} & \textbf{Associated Hazards} & \textbf{Reason for Use} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Design Primitive} & \textbf{Associated Hazards} & \textbf{Reason for Use} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    \codeify{TVar} & 
+    Memory overhead from versioning; restricted mutation outside transactions &	
+    Enables optimistic concurrency control while maintaining type safety. Prevents direct access to shared state outside transactions. \\
+    \hline
+    \codeify{retry} &
+    Indefinite blocking if dependencies never change &
+    Automatically restarts transactions only when relevant state changes, avoiding busy waiting. Enabled by dependency tracking via TVar versioning. \\
+    \hline
+    \codeify{orElse} &
+    Increased contention if alternatives access overlapping TVars &	
+    Allows composable transaction alternatives without manual coordination. Reduces need for nested exception handling. \\
+    \hline
+    \codeify{type-enforced STM/I/O separation} &
+    Limits expressiveness (no I/O in transactions) &
+    Ensures transactions remain rollback-safe. Leverages Haskell's purity to avoid irreversible side effects. \\
+    \hline
+    \codeify{optimistic concurrency (no locks)} &
+    High retry rates under contention &	
+    Avoids lock acquisition overhead in common cases. Aligns with Haskell's allocation-heavy workloads where conflicts are rare. \\
+    \hline
+    \codeify{per-thread transaction logs} &	
+    Memory overhead scaling with thread count &	
+    Enables lock-free progress guarantee: at least one thread always commits without global synchronization. \\
+    \hline
+    \codeify{global version clock} &
+    Clock overflow risk (64-bit memory address space) &
+    Provides a consistent view of shared state across threads. Avoids global synchronization for version updates. \\
+    \hline
+    \codeify{phase-fair reader/writer locks} &
+    Priority inversion in contended writes &
+    Ensures progress for both readers and writers. Critical for real-time systems using STM. \\
+    \hline
+    \codeify{eager conflict detection} &
+    False positives in long transactions &
+    Minimizes wasted work by aborting early. Complements optimistic approach by failing fast. \\
+    \hline
+    \codeify{block-structured heap} &
+    Memory fragmentation from large objects &
+    Enables efficient parallel GC. Allows STM metadata (TVar versions) to coexist with regular objects. \\
+    \hline
+    \codeify{cooperative multitasking} &
+    STM deadlocks in allocation-free loops &
+    Avoids OS thread overhead. Mitigated by -fomit-yields flag inserting yield points. \\
+    \hline
+    \codeify{blackhole-based thunk evaluation} &
+    Duplicated computation in races &
+    Prevents multiple threads evaluating same thunk. Uses CAS for thread-safe lazy evaluation. \\
+    \hline
+\end{longtable}
 This environment mitigates many STM pitfalls like preventing I/O inside transactions (you must use retry or other STM primitives), so the “invisible I/O” problem is solved by the type system. The result is that Haskell STM can offer robust, composable concurrency abstractions (e.g. transactional queues TBQueue, TChan, etc.) with minimal unexpected interactions.
 
 
@@ -89,7 +93,3 @@ While STM is a powerful concurrency control mechanism, it is not without its cha
     \item \textbf{Akka:} Around the same time as .NET abandonment, Akka also abandoned its STM implementation.Akka used the Multiverse library and Clojure-style refs for advanced use cases
     \cite{doc.akka.io}. However, Akka is fundamentally about the actor model, where each actor has private state and interacts by message passing, unlike STM’s shared-memory transactions. Akka tech lead Roland Kuhn notes that STM was “considered a failed experiment” in their context and “never compatible with distributed computing”.
 \end{enumerate}
-
-\subsection{Inference}
-
-STM remains an elegant concurrency model and it continues to be supported (implemented), notably by Haskell and Clojure. In these environments, immutability and strong typing compliment STM’s complexity, and the smaller and academically minded community is comfortable with its cost in exchange for composability and safety. In more conventional and corporate backed ecosystems like .NET, Python or JVM, STM has largely been sidelined in favor of established models like that of task-actor-message models; ones that align with the easier idioms and tooling. Performance considerations, difficulty with I/O and legacy code, and the lack of a “killer app” cemented STM’s decline. Each community made reasonable choice : either optimize around STM or pivot to alternatives better suited. Its not a Swiss Army knife, but a scalpel for specific use cases.
