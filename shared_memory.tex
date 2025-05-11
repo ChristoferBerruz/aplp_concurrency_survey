@@ -107,7 +107,7 @@ mechanism, but it is highly used in the Communicating Sequential Processes (CSP)
 Synchronization primitives allow
 only certain threads to access a shared object at a time.
 Locks, mutexes, semaphores, barriers, conditional variables, and monitors
-are examples of synchronization primitives \cite{andrews1983conceptsOfConcurrency,csf2025synchronizationPrimitives}.
+are examples of synchronization primitives~\cite{andrews1983conceptsOfConcurrency,csf2025synchronizationPrimitives}.
 These mechanism are briefly described in \autoref{tab:mutualExclusionPrimitives}.
 
 \begin{table}[!htp]
@@ -220,7 +220,7 @@ can be reordered. A load instruction reads a value from memory,
 while a store instruction writes a value to memory.
 
 Sequential Consistency (SC) is the strongest
-and most intuitive model ~\cite{lamport1979multiprocessor}.
+and most intuitive model~\cite{lamport1979multiprocessor}.
 To guarantee SC, the system must ensure two properties~\cite{jaffe2011impactOfMemoryModels}:
 \begin{enumerate}
     \item All threads must see the global order of memory operations.
@@ -306,7 +306,7 @@ deterministic multithreading. One disadvantage
 of replay/record systems is that they are costly or infeasible
 to maintain post-deployment. Furthermore,
 hardware oriented solutions to achieve determinism,
-such as the ones proposed in ~\cite{hardwareDeterminism},
+such as the ones proposed in~\cite{hardwareDeterminism},
 are too restrictive because they limit performance
 optimizations. Kendo introduces the notion of Deterministic
 Logical Time (DLT) where each thread maintains a logical
