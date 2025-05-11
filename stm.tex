@@ -59,7 +59,7 @@ Haskell has a strong emphasis on immutability and pure functions. This makes it 
     \hline
     \codeify{cooperative multitasking} &
     STM deadlocks in allocation-free loops &
-    Avoids OS thread overhead. Mitigated by -fomit-yields flag inserting yield points. \\
+    Avoids OS thread overhead. Mitigated by -omit-yields flag inserting yield points. \\
     \hline
     \codeify{blackhole-based thunk evaluation} &
     Duplicated computation in races &
@@ -70,7 +70,7 @@ This environment mitigates many STM pitfalls like preventing I/O inside transact
 
 
 \subsection{Clojure}
-Clojure’s entire identity/state model was built with STM in mind. Clojure’s data structures are immutable and persistent, and the only way to have coordinated shared state is via refs in a dosync block. Rich Hickey’s rationale emphasizes “immutable persistent data structures” plus “built-in concurrency support via STM and asynchronous agents”~\cite{clojure.org}.
+Clojure’s entire identity/state model was built with STM in mind. Clojure’s data structures are immutable and persistent, and the only way to have coordinated shared state is via refs in a \texttt{dosync} block. Rich Hickey’s rationale emphasizes “immutable persistent data structures” plus “built-in concurrency support via STM and asynchronous agents”~\cite{clojure.org}.
 
 
 
@@ -79,17 +79,17 @@ In practice though, many Clojure programs end up using simpler primitives like a
 \subsection{Rust}
 Rust is a systems programming language that emphasizes safety and performance. It has a strong type system and ownership model, which makes it an ideal candidate for STM. Rust's ownership model ensures that data is either mutable or immutable, which helps to prevent side effects in away that is similar to Haskell. Rust's type system also allows for easy reasoning about concurrent programs, as it enforces strict rules about data access and ownership.
 
-These features are implemented through external liraries like stm and async-stm-rs. Former provides STM support for Rust, while the latter async programming support for Rust.
-We also look at design choices of an expermimental STM implementation called TORTIS which stands for Try Once.
+These features are implemented through external libraries like stm and async-stm-rs. Former provides STM support for Rust, while the latter async programming support for Rust.
+We also look at design choices of an experimental STM implementation called TORTIS which stands for Try Once.
 It uses a new method for STM called R2STM, which is a hybrid of optimistic and pessimistic concurrency control. It uses a combination of locks and transactions to provide a more efficient and scalable STM implementation. The design choices for TORTIS are as follow:\\
 
 
-\subsection{Abandonement}
+\subsection{Abandonment}
 
 While STM is a powerful concurrency control mechanism, it is not without its challenges. Some prominent implementations have been abandoned due to various reasons, including performance issues, complexity, and lack of community support :
 \begin{enumerate}
     \item \textbf{.NET:}  Microsoft (MS) had an adaptation of STM :  STM.NET, that was pulled by 2010. Joe Duffy (lead researcher for parallelism and concurrency at MS) and colleagues found less or no compelling workloads that needed STM. Duffy notes that their final discouraging verdict: many concurrency apps “enjoyed natural isolation,” and heavy sharing often meant “you were doing something wrong"\cite{infoq.com}.  In its place, .NET heavily promoted Task Parallel Library (TPL), PLINQ for data parallelism, async/await for async I/O, and concurrent collections as simpler models.
-    \item \textbf{Python:}  Standard CPython(C-based Interpreter) still has a Global Interpreter Lock (GIL), so technically only one thread executes Python bytecode at a time, thereby limiting true parallelism. Efforts like an experimental STM-based PyPy which uses RPython (R-based Interpreter), attempted to remove the GIL by wrapping every Python bytecode in transactions.~\cite{pypy.org}. This allowed multiple threads to run atomic blocks concurrently, rolling back on conflicts. The approach proved complex and was not adopted to mainstream ; instead multiprocessing, asyncio/event loops, and external libraries like Celery took over.
+    \item \textbf{Python:}  Standard CPython(C-based Interpreter) still has a Global Interpreter Lock (GIL), so technically only one thread executes Python bytecode at a time, thereby limiting true parallelism. Efforts like an experimental STM-based PyPy which uses RPython (R-based Interpreter), attempted to remove the GIL by wrapping every Python bytecode in transactions.~\cite{pypy.org}. This allowed multiple threads to run atomic blocks concurrently, rolling back on conflicts. The approach proved complex and was not adopted to mainstream; instead multiprocessing, asyncio/event loops, and external libraries like Celery took over.
     \item \textbf{Akka:} Around the same time as .NET abandonment, Akka also abandoned its STM implementation.Akka used the Multiverse library and Clojure-style refs for advanced use cases~\cite{doc.akka.io}. 
     However, Akka is fundamentally about the actor model, where each actor has private state and interacts by message passing, unlike STM’s shared-memory transactions. Akka tech lead Roland Kuhn notes that STM was “considered a failed experiment” in their context and “never compatible with distributed computing”.
 \end{enumerate}
