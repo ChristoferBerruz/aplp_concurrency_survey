@@ -4,14 +4,14 @@ An actor model is a type of concurrency model where the individual workers are t
 \subsection{Understanding the Actor Model Design}
 The authors in~\cite{8316391} discuss the actor model design by first introducing the actor context. The actor context is the environment where the actors live. It creates actors, tracks them, routes messages to the right actor's mailbox.  The actor is the main unit of work done, in which each actor has a private state, has a mailbox attached, can send messages to other actors and process messages. The mailbox is where the incoming messages for the actor are stored. Processing is not done immediately, but whenever ready, the actor picks up a message from its mailbox and processes it. 
 The actor model is illustrated in Figure~\ref{fig:actor}. 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{actor.png}
     \caption{Actors communicating with other actors.}
     \label{fig:actor}
 \end{figure}
 \subsection{The Actor Model Principle}
-The authors in [12] have also discussed regarding certain principles implemented in the actor model.
+The authors in ~\cite{8316391} have also discussed regarding certain principles implemented in the actor model. Please refer to Table~\ref{tab:actor_model} for understanding the principles outlined in the actor model.
 
 \begin{table}[!htp]
     \centering
