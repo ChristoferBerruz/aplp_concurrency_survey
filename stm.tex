@@ -3,12 +3,12 @@
 \subsection {Overview}
 As introduced earlier, STM is a concurrency control mechanism that allows multiple threads to access shared memory in a way that avoids the need for locks.\\
 
-A minimal way to explain what STM encompasses is through an example~: consider two threads, A and B, that want to update some shared data as shown in Figure~\ref{fig:STM.jpg}. In a traditional lock-based approach, one thread would acquire some type of lock on data before updating it, while the other thread would have to wait until the lock is released. This can lead to contention and deadlocks if both threads try to acquire the lock at the same time\cite{shavit1995software}\cite{kestlerBMC}.
+A minimal way to explain what STM encompasses is through an example~: consider two threads, A and B, that want to update some shared data as shown in Figure~\ref{fig:STM.jpg}. In a traditional lock-based approach, one thread would acquire some type of lock on data before updating it, while the other thread would have to wait until the lock is released. This can lead to contention and deadlocks if both threads try to acquire the lock at the same time~\cite{shavit1995software,kestlerBMC}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{STM.jpg}
-    \caption{Two threads updating shared data \cite{kestlerBMC}}
+    \caption{Two threads updating shared data~\cite{kestlerBMC}}
     \label{fig:STM.jpg}
 \end{figure}
 
@@ -20,10 +20,11 @@ Instead both the threads read the initial state of the data and then go their ow
 
 This example shows how lock-less transactional memory can allow both threads to work independently without blocking each other, leading to better performance and scalability.  
 \subsection{Haskell}
-Haskell has a strong emphasis on immutability and pure functions. This makes it an ideal candidate for STM, as it allows for easier reasoning about concurrent programs.  Haskell is purely functional with a strong type system; most data is immutable, and the side-effects including I/O are tightly controlled by monads.\cite{haskellWiki} 
+Haskell has a strong emphasis on immutability and pure functions. This makes it an ideal candidate for STM, as it allows for easier reasoning about concurrent programs.  Haskell is purely functional with a strong type system; most data is immutable, and the side-effects including I/O are tightly controlled by monads~\cite{haskellWiki}. 
 
 \begin{longtable}{|p{0.25\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
-    \caption{Design choices for Haskell STM \cite{harrisComposable} \cite{harrisLockFree} \cite{harrisTransactional} \cite{tankenobuWiki}\cite{bartoszBeyondLocks}} \label{tab:Haskell-STM Design Choices} \\
+    \caption{Summary of design choices for Haskell STM based on~\cite{harrisComposable,harrisLockFree,harrisTransactional,tankenobuWiki,bartoszBeyondLocks}}
+    \label{tab:Haskell-STM Design Choices} \\
     \hline
     \textbf{Design Primitive} & \textbf{Associated Hazards} & \textbf{Reason for Use} \\
     \hline
@@ -85,14 +86,14 @@ Haskell has a strong emphasis on immutability and pure functions. This makes it 
     Prevents multiple threads evaluating same thunk. Uses CAS for thread-safe lazy evaluation. \\
     \hline
 \end{longtable}
-This environment mitigates many STM pitfalls like preventing I/O inside transactions (you must use retry or other STM primitives), so the “invisible I/O” problem is solved by the type system. The result is that Haskell STM can offer robust, composable concurrency abstractions (e.g. transactional queues TBQueue, TChan, etc.) with minimal unexpected interactions\cite{haskellWiki}\cite{tankenobuWiki}.
+This environment mitigates many STM pitfalls like preventing I/O inside transactions (you must use retry or other STM primitives), so the “invisible I/O” problem is solved by the type system. The result is that Haskell STM can offer robust, composable concurrency abstractions (e.g. transactional queues TBQueue, TChan, etc.) with minimal unexpected interactions~\cite{haskellWiki, tankenobuWiki}.
 
 
 \subsection{Clojure}
-Clojure’s entire identity/state model was built with STM in mind. Clojure’s data structures are immutable and persistent, and the only way to have coordinated shared state is via refs in a dosync block. Rich Hickey’s rationale emphasizes “immutable persistent data structures” plus “built-in concurrency support via STM and asynchronous agents” \cite{hickeyRationale}.
+Clojure’s entire identity/state model was built with STM in mind. Clojure’s data structures are immutable and persistent, and the only way to have coordinated shared state is via refs in a dosync block. Rich Hickey’s rationale emphasizes “immutable persistent data structures” plus “built-in concurrency support via STM and asynchronous agents”~\cite{hickeyRationale}.
 
 \begin{longtable}{|p{0.25\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
-    \caption{Design choices for Clojure \cite{volkmannClojure}} \label{tab:Clojure-STM Design Choices} \\
+    \caption{Design choices for Clojure, based on~\cite{volkmannClojure}} \label{tab:Clojure-STM Design Choices} \\
     \hline
     \textbf{Design Primitive} & \textbf{Associated Hazards} & \textbf{Reason for Use} \\
     \hline
@@ -144,12 +145,12 @@ Clojure’s entire identity/state model was built with STM in mind. Clojure’s 
     \hline
 \end{longtable}
 
-In practice though, many Clojure programs end up using simpler primitives like atoms or persistent queues, but the option of STM is always there and shapes how other features work. For instance, atoms (lock-free single-ref updates) only make sense because data is immutable, a design inspired by STM’s snapshot view. Even if Clojure refs aren’t used “99.9\% of the time”, the fact that the language and libraries expect STM means that concurrency is built on a solid foundation of the immutable design, which were designed for STM\cite{news.ycombinator.com}.
+In practice though, many Clojure programs end up using simpler primitives like atoms or persistent queues, but the option of STM is always there and shapes how other features work. For instance, atoms (lock-free single-ref updates) only make sense because data is immutable, a design inspired by STM’s snapshot view. Even if Clojure refs aren’t used “99.9\% of the time”, the fact that the language and libraries expect STM means that concurrency is built on a solid foundation of the immutable design, which were designed for STM~\cite{news.ycombinator.com}.
 
 \subsection{Rust}
-Rust is a systems programming language that emphasizes safety and performance. It has a strong type system and ownership model, which makes it an ideal candidate for STM. Rust's ownership model ensures that data is either mutable or immutable, which helps to prevent side effects in away that is similar to Haskell. Rust's type system also allows for easy reasoning about concurrent programs, as it enforces strict rules about data access and ownership\cite{rustWiki}.
+Rust is a systems programming language that emphasizes safety and performance. It has a strong type system and ownership model, which makes it an ideal candidate for STM. Rust's ownership model ensures that data is either mutable or immutable, which helps to prevent side effects in away that is similar to Haskell. Rust's type system also allows for easy reasoning about concurrent programs, as it enforces strict rules about data access and ownership~\cite{rustWiki}.
 \begin{longtable}{|p{0.25\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
-    \caption{Design choices for Rust STM \cite{rustSTM}\cite{asyncRustSTM}} \label{tab:Rust-STM Design Choices} \\
+    \caption{Design choices for Rust STM, based on~\cite{rustSTM,asyncRustSTM}} \label{tab:Rust-STM Design Choices} \\
     \hline
     \textbf{Design Primitive (library/crate)} & \textbf{Associated Hazards} & \textbf{Reason for Use} \\
     \hline
@@ -192,12 +193,12 @@ Rust is a systems programming language that emphasizes safety and performance. I
     \hline
 \end{longtable}
 
-These features are implemented through external liraries like \codeify{stm} \cite{rustSTM} and \codeify{async-stm-rs} \cite{asyncRustSTM}. Former provides STM support for Rust, while the latter async programming support for Rust.\\ 
+These features are implemented through external liraries like \codeify{stm}~\cite{rustSTM} and \codeify{async-stm-rs}~\cite{asyncRustSTM}. Former provides STM support for Rust, while the latter async programming support for Rust.\\ 
 
-We also look at design choices of an expermimental STM implementation called TORTIS (try-once real-time STM)\cite{nordTortis}.
+We also look at design choices of an expermimental STM implementation called TORTIS (try-once real-time STM)~\cite{nordTortis}.
 It uses a new method for STM called R\textsuperscript{2}STM, which is a hybrid of optimistic and pessimistic concurrency control. It uses a combination of locks and transactions to provide a more efficient and scalable STM implementation. The design choices for TORTIS are as follow:\\
 \begin{longtable}{|p{0.25\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
-    \caption{Design choices for TORTIS \cite{nordTortis}} \label{tab:Rust-TORTIS Design Choices} \\
+    \caption{Design choices for TORTIS~\cite{nordTortis}} \label{tab:Rust-TORTIS Design Choices} \\
     \hline
     \textbf{Design Primitive} & \textbf{Associated Hazards} & \textbf{Reason for Use} \\
     \hline
@@ -233,7 +234,7 @@ It uses a new method for STM called R\textsuperscript{2}STM, which is a hybrid o
 
 While STM is a powerful concurrency control mechanism, it is not without its challenges. Some prominent implementations have been abandoned due to various reasons, including performance issues, complexity, and lack of community support :
 \begin{enumerate}
-    \item \textbf{.NET:}  Microsoft (MS) had an adaptation of STM :  STM.NET, that was pulled by 2010. Joe Duffy (lead researcher for parallelism and concurrency at MS) and colleagues found less or no compelling workloads that needed STM. Duffy notes that their final discouraging verdict: many concurrency apps “enjoyed natural isolation,” and heavy sharing often meant “you were doing something wrong"\cite{infoq.com}.  In its place, .NET heavily promoted Task Parallel Library (TPL), PLINQ for data parallelism, \codeify{async}/\codeify{await} for async I/O, and concurrent collections as simpler models.
+    \item \textbf{.NET:}  Microsoft (MS) had an adaptation of STM :  STM.NET, that was pulled by 2010. Joe Duffy (lead researcher for parallelism and concurrency at MS) and colleagues found less or no compelling workloads that needed STM. Duffy notes that their final discouraging verdict: many concurrency apps “enjoyed natural isolation,” and heavy sharing often meant “you were doing something wrong"~\cite{infoq.com}.  In its place, .NET heavily promoted Task Parallel Library (TPL), PLINQ for data parallelism, \codeify{async}/\codeify{await} for async I/O, and concurrent collections as simpler models.
     \item \textbf{Python:}  Standard CPython(C-based Interpreter) still has a Global Interpreter Lock (GIL), so technically only one thread executes Python bytecode at a time, thereby limiting true parallelism. Efforts like an experimental STM-based PyPy which uses RPython (R-based Interpreter), attempted to remove the GIL by wrapping every Python bytecode in transactions.~\cite{pypy.org}. This allowed multiple threads to run atomic blocks concurrently, rolling back on conflicts. The approach proved complex and was not adopted to mainstream; instead multiprocessing, asyncio/event loops, and external libraries like Celery took over.
     \item \textbf{Akka:} Around the same time as .NET abandonment, Akka also abandoned its STM implementation.Akka used the Multiverse library and Clojure-style refs for advanced use cases~\cite{docs.akka.io}. 
     However, Akka is fundamentally about the actor model, where each actor has private state and interacts by message passing, unlike STM’s shared-memory transactions. Akka tech lead Roland Kuhn noted that STM was “considered a failed experiment” in their context and “never compatible with distributed computing”~\cite{groups.google.com}.
