@@ -23,7 +23,7 @@ This example shows how lock-less transactional memory can allow both threads to 
 Haskell has a strong emphasis on immutability and pure functions. This makes it an ideal candidate for STM, as it allows for easier reasoning about concurrent programs.  Haskell is purely functional with a strong type system; most data is immutable, and the side-effects including I/O are tightly controlled by monads~\cite{haskellWiki}. 
 
 \begin{longtable}{|p{0.25\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
-    \caption{Summary of design choices for Haskell STM based on~\cite{harrisComposable,harrisLockFree,harrisTransactional,tankenobuWiki,bartoszBeyondLocks}}
+    \caption{Summary of design choices for Haskell based on~\cite{harrisComposable,harrisLockFree,harrisTransactional,tankenobuWiki,bartoszBeyondLocks}}
     \label{tab:Haskell-STM Design Choices} \\
     \hline
     \textbf{Design Primitive} & \textbf{Associated Hazards} & \textbf{Reason for Use} \\
@@ -93,7 +93,7 @@ This environment mitigates many STM pitfalls like preventing I/O inside transact
 Clojure’s entire identity/state model was built with STM in mind. Clojure’s data structures are immutable and persistent, and the only way to have coordinated shared state is via refs in a dosync block. Rich Hickey’s rationale emphasizes “immutable persistent data structures” plus “built-in concurrency support via STM and asynchronous agents”~\cite{hickeyRationale}.
 
 \begin{longtable}{|p{0.25\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
-    \caption{Design choices for Clojure, based on~\cite{volkmannClojure}} \label{tab:Clojure-STM Design Choices} \\
+    \caption{Design choices for Clojure based on~\cite{volkmannClojure}} \label{tab:Clojure-STM Design Choices} \\
     \hline
     \textbf{Design Primitive} & \textbf{Associated Hazards} & \textbf{Reason for Use} \\
     \hline
@@ -150,7 +150,7 @@ In practice though, many Clojure programs end up using simpler primitives like a
 \subsection{Rust}
 Rust is a systems programming language that emphasizes safety and performance. It has a strong type system and ownership model, which makes it an ideal candidate for STM. Rust's ownership model ensures that data is either mutable or immutable, which helps to prevent side effects in away that is similar to Haskell. Rust's type system also allows for easy reasoning about concurrent programs, as it enforces strict rules about data access and ownership~\cite{rustWiki}.
 \begin{longtable}{|p{0.25\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
-    \caption{Design choices for Rust STM, based on~\cite{rustSTM,asyncRustSTM}} \label{tab:Rust-STM Design Choices} \\
+    \caption{Design choices for Rust based on~\cite{rustSTM,asyncRustSTM}} \label{tab:Rust-STM Design Choices} \\
     \hline
     \textbf{Design Primitive (library/crate)} & \textbf{Associated Hazards} & \textbf{Reason for Use} \\
     \hline
