@@ -231,3 +231,198 @@ numpages = {7},
 keywords = {classes, concurrency, conditional critical regions, coroutines, data representations, guarded commands, input, iterative arrays, monitors, multiple entries, multiple exits, nondeterminacy, output, parallel programming, procedures, program structures, programming, programming languages, programming primitives, recursion}
 }
 
+@article{10.1145/173682.165164,
+author = {Herlihy, Maurice and Moss, J. Eliot B.},
+title = {Transactional memory: architectural support for lock-free data structures},
+year = {1993},
+issue_date = {May 1993},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {21},
+number = {2},
+issn = {0163-5964},
+url = {https://doi.org/10.1145/173682.165164},
+doi = {10.1145/173682.165164},
+abstract = {A shared data structure is lock-free if its operations do not require mutual exclusion. If one process is interrupted in the middle of an operation, other processes will not be prevented from operating on that object. In highly concurrent systems, lock-free data structures avoid common problems associated with conventional locking techniques, including priority inversion, convoying, and difficulty of avoiding deadlock. This paper introduces transactional memory, a new multiprocessor architecture intended to make lock-free synchronization as efficient (and easy to use) as conventional techniques based on mutual exclusion. Transactional memory allows programmers to define customized read-modify-write operations that apply to multiple, independently-chosen words of memory. It is implemented by straightforward extensions to any multiprocessor cache-coherence protocol. Simulation results show that transactional memory matches or outperforms the best known locking techniques for simple benchmarks, even in the absence of priority inversion, convoying, and deadlock.},
+journal = {SIGARCH Comput. Archit. News},
+month = may,
+pages = {289–300},
+numpages = {12}
+}
+
+@inproceedings{herlihy1993hardware,
+author = {Herlihy, Maurice and Moss, J. Eliot B.},
+title = {Transactional memory: architectural support for lock-free data structures},
+year = {1993},
+isbn = {0818638109},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/165123.165164},
+doi = {10.1145/165123.165164},
+abstract = {A shared data structure is lock-free if its operations do not require mutual exclusion. If one process is interrupted in the middle of an operation, other processes will not be prevented from operating on that object. In highly concurrent systems, lock-free data structures avoid common problems associated with conventional locking techniques, including priority inversion, convoying, and difficulty of avoiding deadlock. This paper introduces transactional memory, a new multiprocessor architecture intended to make lock-free synchronization as efficient (and easy to use) as conventional techniques based on mutual exclusion. Transactional memory allows programmers to define customized read-modify-write operations that apply to multiple, independently-chosen words of memory. It is implemented by straightforward extensions to any multiprocessor cache-coherence protocol. Simulation results show that transactional memory matches or outperforms the best known locking techniques for simple benchmarks, even in the absence of priority inversion, convoying, and deadlock.},
+booktitle = {Proceedings of the 20th Annual International Symposium on Computer Architecture},
+pages = {289–300},
+numpages = {12},
+location = {San Diego, California, USA},
+series = {ISCA '93}
+}
+
+@inproceedings{shavit1995software,
+author = {Shavit, Nir and Touitou, Dan},
+title = {Software transactional memory},
+year = {1995},
+isbn = {0897917103},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/224964.224987},
+doi = {10.1145/224964.224987},
+booktitle = {Proceedings of the Fourteenth Annual ACM Symposium on Principles of Distributed Computing},
+pages = {204–213},
+numpages = {10},
+location = {Ottowa, Ontario, Canada},
+series = {PODC '95}
+}
+
+@article{kestlerBMC,
+author = {Kraus, Johann and Kestler, Hans},
+year = {2010},
+month = {04},
+pages = {169},
+title = {A highly efficient multi-core algorithm for clustering extremely large datasets},
+volume = {11},
+journal = {BMC bioinformatics},
+doi = {10.1186/1471-2105-11-169}
+}
+
+@inproceedings{harrisComposable,
+author = {Harris, Tim and Marlow, Simon and Peyton-Jones, Simon and Herlihy, Maurice},
+title = {Composable memory transactions},
+year = {2005},
+isbn = {1595930809},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1065944.1065952},
+doi = {10.1145/1065944.1065952},
+abstract = {Writing concurrent programs is notoriously difficult, and is of increasing practical importance. A particular source of concern is that even correctly-implemented concurrency abstractions cannot be composed together to form larger abstractions. In this paper we present a new concurrency model, based on transactional memory, that offers far richer composition. All the usual benefits of transactional memory are present (e.g. freedom from deadlock), but in addition we describe new modular forms of blocking and choice that have been inaccessible in earlier work.},
+booktitle = {Proceedings of the Tenth ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming},
+pages = {48–60},
+numpages = {13},
+keywords = {transactions, non-blocking algorithms, locks},
+location = {Chicago, IL, USA},
+series = {PPoPP '05}
+}
+@inproceedings{harrisLockFree,
+author = {Discolo, Anthony and Harris, Tim and Marlow, Simon and Jones, Simon Peyton and Singh, Satnam},
+title = {Lock free data structures using STM in haskell},
+year = {2006},
+isbn = {3540334386},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg},
+url = {https://doi.org/10.1007/11737414_6},
+doi = {10.1007/11737414_6},
+abstract = {This paper explores the feasibility of re-expressing concurrent algorithms with explicit locks in terms of lock free code written using Haskell's implementation of software transactional memory. Experimental results are presented which show that for multi-processor systems the simpler lock free implementations offer superior performance when compared to their corresponding lock based implementations.},
+booktitle = {Proceedings of the 8th International Conference on Functional and Logic Programming},
+pages = {65–80},
+numpages = {16},
+location = {Fuji-Susono, Japan},
+series = {FLOPS'06}
+}
+@inproceedings{harrisTransactional,
+author = {Harris, Tim and Peyton Jones, Simon},
+title = {Transactional memory with data invariants},
+booktitle = {First ACM SIGPLAN Workshop on Languages, Compilers, and Hardware Support for Transactional Computing (TRANSACT'06)},
+year = {2006},
+month = {June},
+abstract = {This paper introduces a mechanism for asserting invariants that are maintained by a program that uses atomic memory transactions. The idea is simple: a programmer writes check E where E is an expression that should be preserved by every atomic update for the remainder of the program's execution. We have extended STM Haskell to dynamically evaluate check statements atomically with the user's updates: the result is that we can identify precisely which update is the first one to break an invariant.},
+url = {https://www.microsoft.com/en-us/research/publication/transactional-memory-data-invariants/},
+edition = {First ACM SIGPLAN Workshop on Languages, Compilers, and Hardware Support for Transactional Computing (TRANSACT'06)},
+}
+
+@misc{bartoszBeyondLocks,
+  title        = {Beyond Locks: Software Transactional Memory },
+  author       = {Milewski,Bartosz},
+  howpublished = {\url{https://bartoszmilewski.com/2010/09/11/beyond-locks-software-transactional-memory/}},
+  note         = {Accessed: 2025-05-01}
+}
+@misc{tankenobuWiki,
+  title        = {GHC Commentary: Software Transactional Memory (STM)},
+  author       = {Tani, Tonkenobu},
+  howpublished = {\url{https://gitlab.haskell.org/ghc/ghc/-/wikis/commentary/rts/stm}},
+  note         = {Accessed: 2025-05-01}
+}
+
+@misc{haskellWiki,
+  title        = {Software transactional memory},
+  howpublished = {\url{https://wiki.haskell.org/Software_transactional_memory}},
+  note         = {Accessed: 2025-05-01}
+}
+
+
+@misc{news.ycombinator.com,
+  title        = {Ruby's Proposed STM},
+  howpublished = {\url{https://news.ycombinator.com/item?id=24921657/}},
+  note         = {Accessed: 2025-05-01}
+}
+
+@misc{volkmannClojure,
+  title        = {Software Transactional Memory},
+  author       = {Volkmann, R. Mark},
+  howpublished = {\url{https://mvolkmann.github.io/stm/article.html}},
+  note         = {Accessed: 2025-05-01}
+}
+@misc{hickeyRationale,
+  title        = {Rationale},
+  author       = {Hickey, Rich},
+  howpublished = {\url{https://clojure.org/about/rationale}},
+  note         = {Accessed: 2025-05-01}
+}
+
+@misc{rustWiki,
+  howpublished = {\url{https://doc.rust-lang.org/book/#the-rust-programming-language}},
+  note         = {Accessed: 2025-05-01}
+}
+
+@misc{rustSTM,
+  howpublished = {\url{https://crates.io/crates/stm}},
+  note         = {Accessed: 2025-05-01}
+}
+
+@misc{asyncRustSTM,
+  author       = {Farkash, Aakosh},
+  howpublished = {\url{github.com/aakoshh/async-stm-rs}},
+  note         = {Accessed: 2025-05-01}
+}
+@INPROCEEDINGS{nordTortis,
+  author={Nord, Claire and Caspin, Shai and Nemitz, Catherine E. and Shrobe, Howard and Okhravi, Hamed and Anderson, James H. and Burow, Nathan and Ward, Bryan C.},
+  booktitle={2021 IEEE Real-Time Systems Symposium (RTSS)}, 
+  title={TORTIS: Retry-Free Software Transactional Memory for Real-Time Systems}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={469-481},
+  keywords={Concurrent computing;Embedded computing;Codes;Costs;Programming;Throughput;Real-time systems;transactional memory;software transactional memory;real time},
+  doi={10.1109/RTSS52674.2021.00049}
+  }
+
+@misc{infoq.com,
+  title        = {Microsoft’s Experiments with Software Transactional Memory Have Ended},
+  author       = {Allen, Jonathan},
+  howpublished = {\url{https://www.infoq.com/news/2010/05/STM-Dropped}},
+  note         = {Accessed: 2025-05-01}
+}
+@misc{pypy.org,
+  title        = {We need Software Transactional Memory},
+  author       = {Rigo, Armin},
+  howpublished = {\url{https://pypy.org/posts/2011/08/we-need-software-transactional-memory-6513983438425039230.html}},
+  note         = {Accessed: 2025-05-01}
+}
+@misc{docs.akka.io,
+  howpublished = {\url{https://doc.akka.io/libraries/akka/1.2/scala/stm.html}},
+  note         = {Accessed: 2025-05-01}
+}
+
+@misc{groups.google.com,
+  howpublished = {\url{https://groups.google.com/g/akka-user/c/3JWz-X5dbe8/m/YiV4WFG0qh0J}},
+  note         = {Accessed: 2025-05-01}
+}
+
