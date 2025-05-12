@@ -49,3 +49,6 @@
 # project.* files except for project.tex
 project.*
 !project.tex
+
+# zip files
+*.zip
