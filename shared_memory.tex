@@ -5,7 +5,7 @@ Communication is done by reading and writing to a shared object. Refer to
 \autoref{fig:shared_memory} for a visual representation of the shared-memory model.
 
 % shared memory figure
-\begin{figure}[!htp]
+\begin{figure}[!htb]
     \centering
     \begin{tikzpicture}[node distance=1cm and 1.5cm, >=Stealth]
 
@@ -67,7 +67,7 @@ makes it difficult to reproduce bugs, creating \textit{Heisenbugs}~\cite{rookout
 gray1986whyComputersStop}.
 
 %figure for the canonical example
-\begin{figure}[!htp]
+\begin{figure}[!htb]
     \centering
     \begin{tabular}{|p{0.3\linewidth}|p{0.3\linewidth}|}
         \hline
@@ -110,7 +110,7 @@ Locks, mutexes, semaphores, barriers, conditional variables, and monitors
 are examples of synchronization primitives~\cite{andrews1983conceptsOfConcurrency,csf2025synchronizationPrimitives}.
 These mechanism are briefly described in \autoref{tab:mutualExclusionPrimitives}.
 
-\begin{table}[!htp]
+\begin{table}[!htb]
     \caption{Comparison of mutual exclusion mechanisms}
     \label{tab:mutualExclusionPrimitives}
     \centering
@@ -161,7 +161,7 @@ Please refer to \autoref{tab:basicDesignPattens} for a summary.
 
 
 % Table for summarizing basic synchronization design patterns
-\begin{table}[!htp]
+\begin{table}[!htb]
     \caption{Summary of basic synchronization design patterns}
     \label{tab:basicDesignPattens}
     \centering
