@@ -30,21 +30,34 @@
 % Document
 \begin{document}
 
-\title{Comparison in Concurrency Models in different programming languages}
+\title{Comparison of Concurrency Models in Programming Languages}
 \author{
     Christofer Washington Berruz Chungata \\ 
-    Karan Jain \\ 
     Amey Makarand Dhongade \\ 
-    \\
+    Karan Jain \\ 
     San Jos\'{e} State University \\ 
-    CS 252 - Final Project
+    CS 252 Final Project
 }
 \date{May 12, 2025}
 
 \maketitle
 
 \begin{abstract}
-This project is very abstract
+Concurrent programming is necessary for taking advantage of modern multicore architectures.
+However, writing concurrent programs has significant challenges in designing, debugging, and ensuring correctness.
+This survey examines three concurrency models: Shared-Memory (SM), Actor-Model (AM), and Software Transactional Memory (STM).
+Throughout the survey, we focus on their design, core concepts, challenges, and advantages.
+
+The SM model, while simple to implement, is prone to issues like deadlocks, nondeterminism, and debugging difficulties.
+Synchronization primitives, such as locks and semaphores, help manage critical sections but add complexity and rely heavily on programmers' correct usage.
+Efforts like replay systems and deterministic frameworks aim to address reproducibility issues.
+
+The Actor-Model encapsulates state within independent actors that communicate via asynchronous messages, offering scalability and fault tolerance.
+However, it introduces non-deterministic message ordering and integration difficulties with legacy systems.
+Akka and Scalaz are mature frameworks that demonstrate its potential for building resilient, highly available systems.
+
+STM handles critical sections using transactions, shifting concurrency safety to the runtime system.
+While STM thrives in environments like Haskell, due to its immutability and strong typing system, it has seen limited adoption in mainstream ecosystems due to performance trade-offs and integration challenges.
 \end{abstract}
 
 
