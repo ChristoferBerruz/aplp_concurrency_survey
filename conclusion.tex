@@ -21,20 +21,6 @@ Efforts to improve determinism, such as replay systems and
 deterministic frameworks, aim to address these challenges,
 making SM concurrency more predictable and manageable.
 
-STM remains an elegant concurrency model and it
-continues to be supported (implemented), notably by Haskell and Clojure.
-In these environments, immutability and strong typing compliment STM’s complexity,
-and the smaller and academically minded community is comfortable with its cost
-in exchange for composability and safety. In more conventional and corporate
-backed ecosystems like .NET, Python or JVM, STM has largely been sidelined
-in favor of established models like that of task-actor-message models;
-ones that align with the easier idioms and tooling.
-Performance considerations, difficulty with I/O and legacy code,
-and the lack of a “killer app” cemented STM’s decline.
-Each community made reasonable choice: either optimize
-around STM or pivot to alternatives better suited.
-It is not a Swiss Army knife, but a scalpel for specific use cases.
-
 Although the actor model provides a clear conceptual framework encapsulating state 
 within independent actors and communicating solely via asynchronous messages, 
 it is not without its challenges. Message ordering is inherently 
@@ -50,4 +36,17 @@ tuning of dispatchers and routing strategies. In production, mature frameworks
 like Akka on the JVM, show how the actor model can yield highly available, 
 fault-tolerant systems with dynamic scaling and location transparency. Their 
 ecosystems offer robust tooling for monitoring, clustering, and supervised 
-restarts, and their communities value the model’s composability and resilience. 
+restarts, and their communities value the model’s composability and resilience.
+
+STM remains an elegant concurrency model and continues to be supported (implemented), notably by Haskell and Clojure.
+In these environments, immutability and strong typing compliment STM’s complexity,
+and the smaller and academically minded community is comfortable with its cost
+in exchange for composability and safety. In more conventional and corporate
+backed ecosystems like .NET, Python or JVM, STM has largely been sidelined
+in favor of established models like that of task-actor-message models;
+ones that align with the easier idioms and tooling.
+Performance considerations, difficulty with I/O and legacy code,
+and the lack of a “killer app” cemented STM’s decline.
+Each community made reasonable choice: either optimize
+around STM or pivot to alternatives better suited.
+It is not a Swiss Army knife, but a scalpel for specific use cases.
